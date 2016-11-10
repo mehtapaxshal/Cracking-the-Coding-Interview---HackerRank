@@ -1,0 +1,73 @@
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+
+using namespace std;
+
+int number_needed(string a, string b) {
+   
+    std::map<char,int> m1;
+    int cnt=0;
+    for(int i=0;i<a.length();i++)
+        {
+        cnt=1;
+        for(int j=i+1;j<a.length();j++)
+            {
+            if(a[i]==a[j])
+                {
+                cnt++;
+            }
+        }
+        if(m1.find(a[i])==m1.end())
+        {
+            m1[a[i]]=cnt;
+        }
+    }
+    
+    int len=0;
+    for(int i=0;i<b.length();i++)
+        {
+        if(m1.find(b[i])==m1.end())
+            {
+            continue;
+        }else if(m1[b[i]]>0)
+            {
+            len+=2;
+            int val=m1[b[i]];
+            m1[b[i]]=val-1;
+        }else
+            {
+            continue;
+        }
+    }
+    
+    return (a.length()+b.length()-len);
+}
+
+int main(){
+    string a;
+    cin >> a;
+    string b;
+    cin >> b;
+    cout << number_needed(a, b) << endl;
+    return 0;
+}
