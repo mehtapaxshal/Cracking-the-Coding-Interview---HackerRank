@@ -1,0 +1,20 @@
+#include <iostream>
+#include <string>
+
+int main()
+{
+  std::string name="abcdefghjkil\12@;;";
+  
+  int flag[256]={0};
+  for(int i=0;i<name.length();i++)
+  {
+        flag[name[i]]++;
+        if(flag[name[i]] >=2)
+        {
+            std::cout<<"Not unique";
+            return 0;
+        }   
+  }
+  
+  std::cout<<"Unique Characters";
+}
